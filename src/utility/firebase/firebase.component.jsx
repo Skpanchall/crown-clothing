@@ -23,13 +23,29 @@ provider.getCustomParameters({
 
 export const auth = getAuth();
 export const signInWithGooglepopup = ()=> signInWithPopup(auth,provider);
-
+export const signInWithGoogleredirect = ()=> signInWithRedirect(auth,provider);
 export const db = getFirestore();
-export const CreateUserDocumentfromauth =async(auyh) =>{
-  const  userDocref = doc(db,'users',auyh.uid);
-  console.log(userDocref)
+export const CreateUserDocumentfromauth =async(auth) =>{
+  const  userDocref = doc(db,'users',auth.uid);
+  console.log(auth)
 
   const existsuser = await getDoc(userDocref);
   console.log(existsuser.exists())
 
+  if(!existsuser.exists()){
+    
+    const {displayName,email} = auth;
+    const createdAt = new Date();
+    console.log(displayName,email)
+    try{
+       await setDoc(userDocref,{
+        displayName,
+        email,
+        createdAt
+      });
+    }
+    catch(eror){
+      console.log(eror);
+    };
+  }
 }
