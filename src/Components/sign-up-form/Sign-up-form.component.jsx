@@ -1,57 +1,89 @@
 import { useState } from "react";
-
+import { createauthuserwithemailandpassword ,CreateUserDocumentfromauth} from "../../utility/firebase/firebase.component";
+import Forminput from "../form-input/Form-input.component";
+import './Sign-up-form.style.scss';
+import Button from "../button/Button.components";
 const defaultparams = {
-    Displayname:'',
+    displayName:'',
     email : '',
     password :'',
     confirmpassword:''
     
 };
+
 const SignupForm= ()=>{
     const [formfields,setformfields] = useState(defaultparams);
-    console.log(formfields)
-    const { Displayname , email, password, confirmpassword }= formfields;
+    const { displayName , email, password, confirmpassword }= formfields;
+
+    const resetfields =() =>{
+        setformfields(defaultparams);
+    }
+
+    const submithandler = async(event)=>{
+        event.preventDefault();
+        if(password !== confirmpassword){
+            alert("password not match! ");
+            return;
+        }
+        try{
+            const {user} = await createauthuserwithemailandpassword(email,password);
+            console.log(displayName)
+            await CreateUserDocumentfromauth(user,{displayName});
+            resetfields();
+        }catch(error){
+            if(error.code === 'auth/email-already-in-use'){
+                alert('email already in use     ')
+            }else{
+            console.log(error)
+            }
+        }
+        // createauthuserwithemailandpassword();
+    }
     const eventhandler =(event)=>{
         const {name, value}= event.target;
         setformfields({ ...formfields,[name] : value}); 
     }
+
     return(
         <>
-        <h1> Sign up form</h1>
-        <form onSubmit={()=>{}}>
-            <label >Displayname</label>
-            <input 
+        <div className="sign-up-containter">
+        <h2>Dont have an account ?</h2>
+        <span>Sign up with your email and password</span>
+        <form onSubmit={submithandler}>
+            <Forminput 
+            lebel = "displayName"
             type="text"
-            name="Displayname"
-            value={Displayname} 
+            name="displayName"
+            value={displayName} 
             onChange={eventhandler}
             required/>
-            
-            <label >email</label>
-            <input 
-            type="text" 
+
+            <Forminput 
+            lebel = 'email'
+            type="email" 
             name="email"
             value={email}
             onChange={eventhandler}
             required/>
 
-            <label >password</label>
-            <input 
-            type="text" 
+            <Forminput 
+            lebel="password"
+            type="password" 
             name="password"
             value={password}
             onChange={eventhandler}
             required/>
 
-            <label >confirmpassword</label>
-            <input 
-            type="text" 
+            <Forminput 
+            lebel="confirmpassword"
+            type="password" 
             name="confirmpassword"
             value={confirmpassword}
             onChange={eventhandler}
             required/>
-            <input type="submit"  />
+            <Button  buttontype="inverted" type="submit" >Sign up</Button>
         </form>
+        </div>
         </>
     );
 
