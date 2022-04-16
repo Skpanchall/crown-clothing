@@ -45,7 +45,6 @@ const SignupForm= ()=>{
     }
 
     return(
-        <>
         <div className="sign-up-containter">
         <h2>Dont have an account ?</h2>
         <span>Sign up with your email and password</span>
@@ -84,7 +83,6 @@ const SignupForm= ()=>{
             <Button  buttontype="inverted" type="submit" >Sign up</Button>
         </form>
         </div>
-        </>
     );
 
 }
