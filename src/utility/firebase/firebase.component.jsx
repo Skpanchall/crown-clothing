@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getAuth,signInWithRedirect,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth";
+import {getAuth,signInWithRedirect,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut} from "firebase/auth";
 import {getFirestore, doc,setDoc, getDoc} from "firebase/firestore";
+import { async } from "@firebase/util";
 const firebaseConfig = {
   apiKey: "AIzaSyC72V2TBPoSRb5UlQg-7zyh8IIbmVpWd_g",
   authDomain: "crown-db-c2abd.firebaseapp.com",
@@ -64,3 +65,6 @@ export const signinauthuserwithemailandpassword = async (email,password)=>{
   return await signInWithEmailAndPassword(auth,email,password);
 
 }
+
+
+export const signoutuser =async() => await signOut(auth);
