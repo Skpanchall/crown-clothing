@@ -6,11 +6,11 @@ import { Usercontext } from "../../contexts/user.contexts";
 import { signoutuser } from "../../utility/firebase/firebase.component";
 const Navigationbar = ()=> {
 
-const {currentUser, setcurrentuser} = useContext(Usercontext);
+const {currentUser } = useContext(Usercontext);
 
 const signouthandler = async() =>{
     await signoutuser();
-    setcurrentuser(null);
+    // setcurrentuser(null);
 }
 console.log(currentUser)
     return (
