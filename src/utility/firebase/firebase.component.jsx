@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getAuth,signInWithRedirect,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged} from "firebase/auth";
-import {getFirestore, doc,setDoc, getDoc} from "firebase/firestore";
+import {getFirestore, doc,setDoc, getDoc, collection, writeBatch} from "firebase/firestore";
 import { async } from "@firebase/util";
 const firebaseConfig = {
   apiKey: "AIzaSyC72V2TBPoSRb5UlQg-7zyh8IIbmVpWd_g",
@@ -58,7 +58,19 @@ export const createauthuserwithemailandpassword = async (email,password)=>{
 
 }
 
+export const addcollectionanddocuments = async (collectionkey,objectstoadd)=>{
+  const collectionref = collection(db,collectionkey );
+  const batch = writeBatch(db);
+console.log(objectstoadd)
+  objectstoadd.forEach((object)=> {
+    const docref = doc(collectionref, object.title.toLowerCase());
+    batch.set(docref , object);
+  } );
 
+  await batch.commit();
+
+
+}
 export const signinauthuserwithemailandpassword = async (email,password)=>{
   if(!email || !password) return ;
   
