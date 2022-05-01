@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getAuth,signInWithRedirect,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged} from "firebase/auth";
 import {getFirestore, doc,setDoc,getDoc, getDocs, collection, writeBatch, query} from "firebase/firestore";
-import { async } from "@firebase/util";
 const firebaseConfig = {
   apiKey: "AIzaSyC72V2TBPoSRb5UlQg-7zyh8IIbmVpWd_g",
   authDomain: "crown-db-c2abd.firebaseapp.com",
