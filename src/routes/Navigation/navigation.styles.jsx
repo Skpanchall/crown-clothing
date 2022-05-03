@@ -27,15 +27,3 @@ export const Navlink = styled(Link)`
       cursor: pointer;
 `
 
-// .navigation {
-
-//   .logo-container {
-//   }
-
-//   .nav-links-container {
-
-//     .nav-link {
-
-//     }
-//   }
-// }

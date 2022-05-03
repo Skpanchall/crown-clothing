@@ -11,7 +11,6 @@ const Navigationbar = ()=> {
 
 const {currentUser } = useContext(Usercontext);
 const {iscartopen} = useContext(Cartcontext);
-
     return (
     <Fragment>
         <Navigationcontainer>
@@ -24,7 +23,7 @@ const {iscartopen} = useContext(Cartcontext);
                 </Navlink>
                 {
                     currentUser ? (
-                        <Navlink   onClick={signoutuser}>SIGN OUT</Navlink>
+                        <Navlink as= "span" onClick={signoutuser}>SIGN OUT</Navlink>
                     ) : (<Navlink  to='/auth'>
                     Signin
                     </Navlink>)
