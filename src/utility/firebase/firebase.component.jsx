@@ -74,12 +74,10 @@ console.log(objectstoadd)
 export const getcategoriesanddocuments = async() => {
     const collectionref = collection(db,'categories');
     const qsss = query(collectionref);
-    console.log(qsss)
+    
     const querysnapshot = await getDocs(qsss);
-    console.log(querysnapshot.docs)
-  const categoriess = querysnapshot.docs.reduce((acc,dacsnapshot)=>{
+    const categoriess = querysnapshot.docs.reduce((acc,dacsnapshot)=>{
     const {title,items} = dacsnapshot.data();
-    // console.log(dacsnapshot.data())
     acc[ title.toLowerCase() ]= items;
     return acc;
   },{});

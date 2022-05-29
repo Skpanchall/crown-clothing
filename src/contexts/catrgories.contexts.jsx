@@ -7,17 +7,15 @@ export const Categoriescontext = createContext({
 
 
 export const CategoriesProvider = ({children})=>{
-    const [categories , setcategories] = useState([]);
+    const [categories , setcategories] = useState({});
     useEffect(()=>{
         const getcategories = async() =>{
             const categories = await getcategoriesanddocuments();
             setcategories(categories);
         }
-        getcategories();
+        getcategories(); 
 
     },[]);
-
     const value = {categories};
-
     return <Categoriescontext.Provider value={value}>{children}</Categoriescontext.Provider>
 }

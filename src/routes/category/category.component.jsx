@@ -2,11 +2,11 @@ import { useEffect, useContext, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import Productcard from "../../Components/product-card/product-card.component";
 import { Categoriescontext } from "../../contexts/catrgories.contexts";
-import './category.styles.scss'
+import './category.styles.jsx'
 const Category = ()=>{
     const {category} = useParams();
     const {categories} = useContext(Categoriescontext);
-    const  [products,setproducts]= useState([]);
+    const  [products,setproducts]= useState(categories[category]);
     useEffect(()=>{
     setproducts(categories[category])
 
@@ -16,7 +16,7 @@ const Category = ()=>{
         <Fragment>
             <h2 className="category-title">{category}</h2>
             <div className="category-container">
-                {
+                {products &&
                     products.map((product)=> {
                     return <Productcard key={product.id} product={product} />
                     })
