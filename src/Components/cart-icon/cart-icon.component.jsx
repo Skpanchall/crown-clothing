@@ -1,10 +1,14 @@
-import { useContext } from 'react';
+import {useSelector, useDispatch} from "react-redux";
 import {ShoppingIcon ,Carticoncontainer ,Itemcount} from  './cart-icon.styles.jsx';
-import { Cartcontext } from '../../contexts/cart.contexts';
-const Carticon =()=>{
+import { setCartisopen } from '../../strore/cart/cart.action.js';
+import { SelectCartisopen,selectcartcount } from '../../strore/cart/cart.selector.js';
 
-const {iscartopen , setiscartopen, cartcounter} = useContext(Cartcontext);
-const toggleiscartopen = () => setiscartopen(!iscartopen);
+const Carticon =()=>{
+const dispatch = useDispatch();
+const iscartopen = useSelector(SelectCartisopen);
+const cartcounter = useSelector(selectcartcount);
+
+const toggleiscartopen = () => dispatch(setCartisopen(!iscartopen))
     return(
         <Carticoncontainer onClick={toggleiscartopen}>
             <ShoppingIcon />
