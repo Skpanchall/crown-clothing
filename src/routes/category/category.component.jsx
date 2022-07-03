@@ -6,7 +6,7 @@ import { getcategory } from "../../strore/categories/category.selector";
 import {CategoryContainer,Title} from  './category.styles.jsx'
 const Category = ()=>{
     const {category} = useParams();
-    const categories = useSelector(getcategory)
+    const categories = useSelector(getcategory);
     const  [products,setproducts]= useState(categories[category]);
     useEffect(()=>{
     setproducts(categories[category])
