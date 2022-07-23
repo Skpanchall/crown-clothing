@@ -19,4 +19,9 @@ export const getcategory = createSelector(
       },{});
     }
 );
-    
+
+
+export const select_categories_loading = createSelector(
+    [selectcategoryreducer],
+    (categoriesslice)=>categoriesslice.isloading
+)
